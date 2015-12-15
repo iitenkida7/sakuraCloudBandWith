@@ -4,9 +4,9 @@
 class  sakuraCloudBandWith {
 	private $token         = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 	private $secretToken   = "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
-	private $baseURL       = "secure.sakura.ad.jp/cloud/zone/is1b/api/cloud/1.1/internet"; // $B@P<mBh#2(B 
-	private $maxLimit      = 50; //xMbps$B$rD6$($?$i!!!"(B500Mbps $BBS0h$KJQ99(B
-	private $minLimit      = 30; //xMbps$B$r2<2s$C$?$i!"(B100Mbps $BBS0h$KJQ99(B
+	private $baseURL       = "secure.sakura.ad.jp/cloud/zone/is1b/api/cloud/1.1/internet"; // 石狩第２ 
+	private $maxLimit      = 50; //xMbpsを超えたら　、500Mbps 帯域に変更
+	private $minLimit      = 30; //xMbpsを下回ったら、100Mbps 帯域に変更
 
 	private $routerID      = "";
 	private $BandWidthMbps = "";
@@ -69,14 +69,14 @@ class  sakuraCloudBandWith {
 			return 0;
 		}
 
-		//$BD>6a2?7o<hF@$9$k$+(B
+		//直近何件取得するか
 		$i = 5;
 		$cnt = $i;
 		$sum = 0;
 
 		$arrayCount = count($out) - 1 ;
 
-		//$BBS0hJQ99$r9T$J$&$H!"(BTraffic$BE}7W$,0lC6>C$($k$?$a!"@5>o$K=87W$G$-$J$$!#$=$N>l9g$O!"#0$rJV5Q(B
+		//帯域変更を行なうと、Traffic統計が一旦消えるため、正常に集計できない。その場合は、０を返却
 		if($arrayCount < $i){
 			return 0;
 		}
